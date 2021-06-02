@@ -49,7 +49,6 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget> {
   final GlobalKey<AnimatedFocusLightState> _focusLightKey = GlobalKey();
   bool showContent = false;
   TargetFocus? currentTarget;
-  Stream<Rect> drawBounds;
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +106,6 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget> {
     if (target == null) {
       return SizedBox.shrink();
     }
-
-    List<Widget> children = List();
 
     var positioned = Offset(
       target.offset.dx + target.size.width / 2,

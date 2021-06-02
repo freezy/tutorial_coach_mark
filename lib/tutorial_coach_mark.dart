@@ -9,6 +9,8 @@ export 'package:tutorial_coach_mark/src/target/target_focus.dart';
 export 'package:tutorial_coach_mark/src/target/target_position.dart';
 export 'package:tutorial_coach_mark/src/util.dart';
 
+export '/src/target/target_position.dart';
+
 class TutorialCoachMark {
   final BuildContext _context;
   final List<TargetFocus> targets;
@@ -45,7 +47,7 @@ class TutorialCoachMark {
     this.opacityShadow = 0.8,
     this.focusAnimationDuration = const Duration(milliseconds: 600),
     this.pulseAnimationDuration = const Duration(milliseconds: 500),
-  }) : assert(targets != null, opacityShadow >= 0 && opacityShadow <= 1);
+  }) : assert(opacityShadow >= 0 && opacityShadow <= 1);
 
   OverlayEntry _buildOverlay() {
     return OverlayEntry(

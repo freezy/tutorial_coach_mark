@@ -1,16 +1,15 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:tutorial_coach_mark/src/target/target_position.dart';
 
 class LightPaintRect extends CustomPainter {
   final double progress;
-  final TargetPosition target;
+  final TargetPosition? target;
   final Color colorShadow;
   final double opacityShadow;
   final double offset;
   final double radius;
-  final Rect bounds;
+  final Rect? bounds;
 
   late Paint _paintFocus;
 
@@ -31,7 +30,7 @@ class LightPaintRect extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
 
-    if (bounds == null && target?.offset == null) {
+    if (bounds == null || target == null) {
       return;
     }
 
@@ -41,17 +40,17 @@ class LightPaintRect extends CustomPainter {
 
     RRect rrect;
     if (bounds != null) {
-      double x = -maxSize / 2 * (1 - progress) + bounds.left - offset / 2;
-      double y = -maxSize / 2 * (1 - progress) + bounds.top - offset / 2;
-      double w = maxSize * (1 - progress) + bounds.width + offset;
-      double h = maxSize * (1 - progress) + bounds.height + offset;
+      double x = -maxSize / 2 * (1 - progress) + bounds!.left - offset / 2;
+      double y = -maxSize / 2 * (1 - progress) + bounds!.top - offset / 2;
+      double w = maxSize * (1 - progress) + bounds!.width + offset;
+      double h = maxSize * (1 - progress) + bounds!.height + offset;
       rrect = RRect.fromRectAndRadius(Rect.fromLTWH(x, y, w, h), Radius.circular(radius));
 
-    } else if (target?.offset != null) {
-      double x = -maxSize / 2 * (1 - progress) + target.offset.dx - offset / 2;
-      double y = -maxSize / 2 * (1 - progress) + target.offset.dy - offset / 2;
-      double w = maxSize * (1 - progress) + target.size.width + offset;
-      double h = maxSize * (1 - progress) + target.size.height + offset;
+    } else {
+      double x = -maxSize / 2 * (1 - progress) + target!.offset.dx - offset / 2;
+      double y = -maxSize / 2 * (1 - progress) + target!.offset.dy - offset / 2;
+      double w = maxSize * (1 - progress) + target!.size.width + offset;
+      double h = maxSize * (1 - progress) + target!.size.height + offset;
       rrect = RRect.fromRectAndRadius(Rect.fromLTWH(x, y, w, h), Radius.circular(radius));
     }
 
